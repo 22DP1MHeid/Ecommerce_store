@@ -8,6 +8,7 @@ import Card from '../Components/Card.vue'
 <template>
     <main>
         <Navbar/>
+        <Card/>
         <Footer/>
     </main>
 </template>

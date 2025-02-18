@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar">
         <div class="logo">
-            <h1><a href="/">MyApp</a></h1>
+            <h1><a href="/">LOGO</a></h1>
         </div>
         <ul class="navbar-links">
             <li><a href="/">Home</a></li>
