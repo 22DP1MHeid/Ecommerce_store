@@ -16,8 +16,8 @@ use Inertia\Inertia;
 }); */
 
 Route::get('/', function () {
-    return Inertia::render('Homepage');
-})->name('Homepage');
+    return Inertia::render('HomeView');
+})->name('HomeView');
 
 /* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
