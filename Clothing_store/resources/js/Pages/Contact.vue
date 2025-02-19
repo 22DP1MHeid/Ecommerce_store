@@ -62,13 +62,13 @@
 <script>
 import NavBar from '@/Components/NavBar.vue';
 import Footer from '@/Components/Footer.vue';
-import Card from "@/Components/Card.vue";
+import ProductCard from "@/Components/ProductCard.vue";
 import Navbar from "@/Components/NavBar.vue";
 
 export default {
     name: 'Contact',
     components: {
-        Navbar, Card,
+        Navbar, Card: ProductCard,
         NavBar,
         Footer
     },

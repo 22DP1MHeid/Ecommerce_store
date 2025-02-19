@@ -1,8 +1,8 @@
 <script setup>
 import Navbar from '../Components/NavBar.vue'
 import Footer from '../Components/Footer.vue'
-import Card from '../Components/Card.vue'
-import Slideshow from "@/Components/Slideshow.vue";
+import ProductCard from '../Components/ProductCard.vue'
+import Slideshow from '../Components/Slideshow.vue'
 
 </script>
 
@@ -10,7 +10,7 @@ import Slideshow from "@/Components/Slideshow.vue";
     <main>
         <Navbar/>
         <Slideshow/>
-        <Card/>
+        <ProductCard/>
         <Footer/>
     </main>
 </template>
