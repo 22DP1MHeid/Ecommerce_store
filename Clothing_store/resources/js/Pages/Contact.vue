@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Include Navbar Component -->
-        <Navbar />
+        <Navbar/>
 
         <!-- Contact Page Content -->
         <div class="contact-page">
@@ -62,10 +62,13 @@
 <script>
 import NavBar from '@/Components/NavBar.vue';
 import Footer from '@/Components/Footer.vue';
+import Card from "@/Components/Card.vue";
+import Navbar from "@/Components/NavBar.vue";
 
 export default {
     name: 'Contact',
     components: {
+        Navbar, Card,
         NavBar,
         Footer
     },

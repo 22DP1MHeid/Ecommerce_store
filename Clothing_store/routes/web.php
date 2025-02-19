@@ -23,6 +23,9 @@ Route::get('/about', function () {
     return Inertia::render('About');
 });
 
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+});
 
 /* Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
