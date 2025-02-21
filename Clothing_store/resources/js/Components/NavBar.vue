@@ -3,7 +3,12 @@
         <div class="logo">
             <h1><a href="/">ETH3REAL</a></h1>
         </div>
-        <ul class="navbar-links">
+        <div class="hamburger" @click="toggleMenu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar-links" :class="{ 'active': menuActive }">
             <li><a href="/">Home</a></li>
             <li><a href="/women">Women</a></li>
             <li><a href="/men">Men</a></li>
@@ -15,7 +20,17 @@
 
 <script>
 export default {
-    name: "NavBar"
+    name: "NavBar",
+    data() {
+        return {
+            menuActive: false
+        };
+    },
+    methods: {
+        toggleMenu() {
+            this.menuActive = !this.menuActive;
+        }
+    }
 };
 </script>
 
@@ -27,6 +42,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .navbar .logo h1 {
@@ -61,13 +77,48 @@ export default {
     color: #fff; /* Keep text color white on hover */
 }
 
+/* Hamburger menu */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+}
+
+.hamburger .bar {
+    width: 25px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
 /* Media Query for Responsive Design */
 @media screen and (max-width: 790px) {
     .navbar .navbar-links {
         display: none; /* Hide navbar links on small screens */
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #000;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
     }
-    .navbar .logo h1 {
-        font-size: 1.5rem; /* Adjust logo size for smaller screens */
+
+    .navbar .navbar-links.active {
+        display: flex; /* Show links when active */
+    }
+
+    .navbar .navbar-links li {
+        margin: 10px 0; /* Increase vertical spacing */
+    }
+
+    .hamburger {
+        display: flex; /* Show hamburger menu on mobile */
     }
 }
 </style>

@@ -27,6 +27,10 @@ Route::get('/contact', function () {
     return Inertia::render('Contact');
 });
 
+Route::get('/privacy', function () {
+    return Inertia::render('Privacy');
+});
+
 Route::get('/women', function () {
     return Inertia::render('Women');
 });
