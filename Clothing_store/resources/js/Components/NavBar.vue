@@ -8,10 +8,23 @@
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-        <ul>
-            <li><a href="/women">Women</a></li>
-            <li><a href="/men">Men</a></li>
-            <!-- Person Icon replaced Login and Register -->
+        <ul :class="{ 'navbar-links': true, 'active': menuActive }">
+            <li class="dropdown" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false">
+                <a href="#">Women</a>
+                <ul v-if="showDropdown" class="dropdown-menu">
+                    <li><a href="/women/clothing">Clothing</a></li>
+                    <li><a href="/women/shoes">Shoes</a></li>
+                    <li><a href="/women/accessories">Accessories</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" @mouseenter="showDropdownMen = true" @mouseleave="showDropdownMen = false">
+                <a href="#">Men</a>
+                <ul v-if="showDropdownMen" class="dropdown-menu">
+                    <li><a href="/men/clothing">Clothing</a></li>
+                    <li><a href="/men/shoes">Shoes</a></li>
+                    <li><a href="/men/accessories">Accessories</a></li>
+                </ul>
+            </li>
             <li class="person-icon">
                 <a href="/register">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -20,7 +33,6 @@
                     </svg>
                 </a>
             </li>
-            <!-- Shopping Cart Icon -->
             <li class="cart-icon">
                 <a href="/cart">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -40,127 +52,101 @@ export default {
     data() {
         return {
             menuActive: false,
-            isSearchModalOpen: false,
-            searchQuery: ""
+            showDropdown: false,
+            showDropdownMen: false
         };
     },
     methods: {
         toggleMenu() {
             this.menuActive = !this.menuActive;
-        },
-        toggleSearchModal() {
-            this.isSearchModalOpen = !this.isSearchModalOpen;
-        },
-        closeSearchModal() {
-            this.isSearchModalOpen = false;
-        },
-        search() {
-            // You will later connect this to your Laravel backend
-            console.log("Searching for: ", this.searchQuery);
         }
     }
 };
 </script>
 
 <style scoped>
-/* Navbar Styling */
 .navbar {
-    background-color: #000; /* Set background color to black */
+    background-color: #000;
     padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
-    z-index: 100; /* Ensure navbar stays above other content */
+    z-index: 100;
 }
 
-.navbar .logo h1 {
-    color: #fff; /* Set logo text color to white */
-    margin: 0;
-    font-size: 24px;
+.navbar .logo h1 a {
+    color: #fff;
+    text-decoration: none;
 }
 
-.navbar .navbar-links {
+.navbar-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-    align-items: center; /* Align items in the center */
+    align-items: center;
 }
 
-.navbar .navbar-links li {
+.navbar-links li {
     margin-left: 20px;
-    display: flex;
-    align-items: center; /* Ensure items are aligned vertically */
+    position: relative;
 }
 
-.navbar .navbar-links a {
-    color: #fff; /* Set link color to white */
+.navbar-links a {
+    color: #fff;
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
-    padding: 10px 15px; /* Added padding for clickable area */
-    border-radius: 5px; /* Round the corners */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
-}
-
-/* Hover effect for links */
-.navbar .navbar-links a:hover {
-    background-color: #444; /* Slightly lighter black background */
-    color: #fff; /* Keep text color white on hover */
-}
-
-/* Person Icon styling */
-.navbar .navbar-links .person-icon a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
+    padding: 10px 15px;
+    border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
-.navbar .navbar-links .person-icon a svg {
-    width: 24px; /* Increased size of the icon */
-    height: 24px; /* Increased size of the icon */
+.navbar-links a:hover {
+    background-color: #444;
 }
 
-/* Hover effect for person icon */
-.navbar .navbar-links .person-icon a:hover {
-    background-color: #444; /* Slightly lighter background on hover */
-}
-
-/* Shopping Cart Icon styling */
-.navbar .navbar-links .cart-icon a {
+.dropdown {
+    position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
 }
 
-.navbar .navbar-links .cart-icon a svg {
-    width: 24px; /* Icon size */
-    height: 24px;
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #222;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: max-content;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 200;
 }
 
-/* Hover effect for cart icon */
-.navbar .navbar-links .cart-icon a:hover {
-    background-color: #444; /* Slightly lighter background on hover */
+.dropdown-menu li {
+    padding: 8px 15px;
 }
 
-/* Hamburger menu */
+.dropdown-menu a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #444;
+}
+
 .hamburger {
     display: none;
     cursor: pointer;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
     height: 30px;
     width: 30px;
 }
@@ -172,30 +158,37 @@ export default {
     border-radius: 5px;
 }
 
-/* Media Query for Responsive Design */
+.person-icon a,
+.cart-icon a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+}
+
 @media screen and (max-width: 790px) {
-    .navbar .navbar-links {
-        display: none; /* Hide navbar links on small screens */
-        width: 100%;
+    .navbar-links {
+        display: none;
+        flex-direction: column;
         position: absolute;
         top: 60px;
         left: 0;
         background-color: #000;
-        flex-direction: column;
-        align-items: center;
+        width: 100%;
         padding: 20px 0;
+        z-index: 150;
     }
-
-    .navbar .navbar-links.active {
-        display: flex; /* Show links when active */
+    .navbar-links.active {
+        display: flex;
     }
-
-    .navbar .navbar-links li {
-        margin: 10px 0; /* Increase vertical spacing */
+    .navbar-links li {
+        margin: 10px 0;
     }
-
     .hamburger {
-        display: flex; /* Show hamburger menu on mobile */
+        display: flex;
     }
 }
 </style>
